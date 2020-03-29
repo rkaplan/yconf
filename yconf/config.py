@@ -84,9 +84,9 @@ class BaseConfiguration(NestedDict):
         else:
             raise TypeError("Environment value is not an integer or a valid string: %r" % environment)
 
-    def makeParser(self):
+    def makeParser(self, config_required=False):
         self._configParser = argparse.ArgumentParser(add_help=False)
-        self._configParser.add_argument("-c", "--config", dest="configPath",
+        self._configParser.add_argument("-c", "--config", dest="configPath", required=config_required,
                                         help="Configuration file or directory containing the configuration files.")
         self._configParser.add_argument("-e", "--environment", default="production",
                                         choices=("production", "staging", "development"),
